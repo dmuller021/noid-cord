@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 
+use App\Events\Message;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,5 +24,21 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/chat', function(){
+    return view('chat');
+});
+
+Route::post('/chat/send-message', function(Request $request){
+    event(
+        new Message(
+            $request->input('username'),
+            $request->input('message')
+        )
+    );
+
+    return ["success" => true];
+});
+
 
 require __DIR__.'/auth.php';
