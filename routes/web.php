@@ -29,7 +29,7 @@ Route::get('/chat', function(){
     return view('chat');
 });
 
-Route::post('/chat/send-message', function(Request $request){
+Route::post('/send-message', function(Request $request){
     event(
         new Message(
             $request->input('username'),

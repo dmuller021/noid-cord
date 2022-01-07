@@ -27,6 +27,10 @@ message_form.addEventListener('submit', function (e) {
         has_errors = true;
     }
 
+    if (has_errors) {
+        return;
+    }
+
 
 
     const options = {
@@ -43,7 +47,9 @@ message_form.addEventListener('submit', function (e) {
 
 window.Echo.channel('chat')
     .listen('.message', (e) => {
-        messages_el.innerHTML += '<div class="message"><strong>' + e.username + ':</strong>' + e.message
-            + '</div>'
+        messages_el.innerHTML += '<div class="message"><strong>' + e.username + ': </strong> ' + e.message
+            + '</div>',
+
+        message_input.innerHTML = '<div class="messsage_input" value="test"></div>'
         console.log(e);
     })

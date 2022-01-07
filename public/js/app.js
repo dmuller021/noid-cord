@@ -5469,7 +5469,7 @@ message_form.addEventListener('submit', function (e) {
     has_errors = true;
   }
 
-  if (has_error) {
+  if (has_errors) {
     return;
   }
 
@@ -5484,7 +5484,8 @@ message_form.addEventListener('submit', function (e) {
   axios(options);
 });
 window.Echo.channel('chat').listen('.message', function (e) {
-  messages_el.innerHTML += '<div class="message"><strong>' + e.username + ':</strong>' + e.message + '</div>';
+  messages_el.innerHTML += '<div class="message"><strong>' + e.username + ': </strong> ' + e.message + '</div>', message_input.innerHTML = '<div class="messsage_input" value="test"></div>';
+  console.log(e);
 });
 
 /***/ }),
@@ -5517,8 +5518,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: 'e5d9c7fb7cd8e864c84c',
-  cluster: 'eu',
+  key: "e5d9c7fb7cd8e864c84c",
+  cluster: "eu",
   forceTLS: true
 });
 
