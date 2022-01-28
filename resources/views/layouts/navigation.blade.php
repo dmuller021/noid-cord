@@ -16,6 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <a href="/chat">Chat</a>
+                    <a href="/friends">Friends</a>
                 </div>
             </div>
 

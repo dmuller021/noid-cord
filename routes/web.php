@@ -5,6 +5,9 @@ use App\Events\Message;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Controllers\FriendsController;
+use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +30,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/chat', function(){
     return view('chat');
-});
+})->middleware(['auth']);
+
+Route::resource('/friends', FriendsController::class)->middleware(['auth']);
 
 Route::post('/send-message', function(Request $request){
     event(
