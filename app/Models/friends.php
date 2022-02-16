@@ -15,6 +15,11 @@ class friends extends Model
 
     protected $fillable = ['user_id_1', 'user_id_2'];
 
+//    public function friends($filled_id)
+//    {
+//    return friends::where('id', $filled_id)->get();
+//    }
+
     public function user()
     {
         return $this->belongsToMany('User');

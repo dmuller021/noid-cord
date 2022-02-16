@@ -6,11 +6,22 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+let token = document.head.querySelector('meta[name="csrf-token"]')
 
+const friends_input = document.getElementById("friendID");
 const messages_el = document.getElementById("messages");
 const username_input = document.getElementById("username");
-const message_input = document.getElementById("message_input");
+const message_input = document.getElementById("privateMessage");
 const message_form = document.getElementById("message_form");
+// var privateChannel = pusher.subscribe("friends.")
+
+function clear() {
+    document.getElementById("message_form").reset();
+}
+
+console.log(friends_input);
+console.log(message_input);
+console.log(username_input);
 
 message_form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -35,21 +46,22 @@ message_form.addEventListener('submit', function (e) {
 
     const options = {
         method: 'post',
-        url: '/send-message',
+        url: '/send-privateMessage',
         data: {
-            username: username_input.value,
-            message: message_input.value
+            user: username_input.value,
+            friendID: friends_input.value,
+            privateMessage: message_input.value
         }
     }
 
     axios(options);
 });
 
-window.Echo.channel('chat')
-    .listen('.message', (e) => {
-        messages_el.innerHTML += '<div class="message"><strong>' + e.username + ': </strong> ' + e.message
+window.Echo.channel('friends.'+friends_input.value)
+    .listen('.DM', (e) => {
+        messages_el.innerHTML += '<div class="messages"><strong>' + e.user + ': </strong> ' + e.privateMessage
             + '</div>',
 
-        message_input.innerHTML = '<div class="messsage_input" value="test"></div>'
+        message_input.innerHTML = '<div class="messsage_input" value=""></div>'
         console.log(e);
     })
