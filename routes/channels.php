@@ -1,6 +1,9 @@
 <?php
 
+
 use Illuminate\Support\Facades\Broadcast;
+use App\Models\friends;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,13 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+//Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+//    return (int) $user->id === (int) $id;
+//});
+
+Broadcast::channel('friends.{friendID}', function (User $user, friends $friendID){
+    if($user->id === $friendID->user_id_1 || $user->id === $friendID->user_id_2 && friends::find($friendID->id)) {
+        return true;
+    }
+     return false;
 });

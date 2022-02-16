@@ -5451,10 +5451,20 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+var token = document.head.querySelector('meta[name="csrf-token"]');
+var friends_input = document.getElementById("friendID");
 var messages_el = document.getElementById("messages");
 var username_input = document.getElementById("username");
-var message_input = document.getElementById("message_input");
-var message_form = document.getElementById("message_form");
+var message_input = document.getElementById("privateMessage");
+var message_form = document.getElementById("message_form"); // var privateChannel = pusher.subscribe("friends.")
+
+function clear() {
+  document.getElementById("message_form").reset();
+}
+
+console.log(friends_input);
+console.log(message_input);
+console.log(username_input);
 message_form.addEventListener('submit', function (e) {
   e.preventDefault();
   var has_errors = false;
@@ -5475,16 +5485,17 @@ message_form.addEventListener('submit', function (e) {
 
   var options = {
     method: 'post',
-    url: '/send-message',
+    url: '/send-privateMessage',
     data: {
-      username: username_input.value,
-      message: message_input.value
+      user: username_input.value,
+      friendID: friends_input.value,
+      privateMessage: message_input.value
     }
   };
   axios(options);
 });
-window.Echo.channel('chat').listen('.message', function (e) {
-  messages_el.innerHTML += '<div class="message"><strong>' + e.username + ': </strong> ' + e.message + '</div>', message_input.innerHTML = '<div class="messsage_input" value="test"></div>';
+window.Echo.channel('friends.' + friends_input.value).listen('.DM', function (e) {
+  messages_el.innerHTML += '<div class="messages"><strong>' + e.user + ': </strong> ' + e.privateMessage + '</div>', message_input.innerHTML = '<div class="messsage_input" value=""></div>';
   console.log(e);
 });
 
@@ -5508,6 +5519,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.withCredentials = true;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -5520,7 +5532,24 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "e5d9c7fb7cd8e864c84c",
   cluster: "eu",
-  forceTLS: true
+  forceTLS: true,
+  encryption: true // authorizer: (channel, options) => {
+  //     return {
+  //         authorize: (socketId, callback) => {
+  //             axios.post('/broadcasting/auth', {
+  //                 socket_id: socketId,
+  //                 channel_name: channel
+  //             })
+  //                 .then(response => {
+  //                     callback(false, response.data);
+  //                 })
+  //                 .catch(error => {
+  //                     callback(true, error);
+  //                 });
+  //         }
+  //     };
+  // },
+
 });
 
 /***/ }),

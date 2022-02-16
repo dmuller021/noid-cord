@@ -10,6 +10,8 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+window.axios.withCredentials = true;
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -24,5 +26,25 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    forceTLS: true
+    forceTLS: true,
+    encryption: true
+
+
+
+    // authorizer: (channel, options) => {
+    //     return {
+    //         authorize: (socketId, callback) => {
+    //             axios.post('/broadcasting/auth', {
+    //                 socket_id: socketId,
+    //                 channel_name: channel
+    //             })
+    //                 .then(response => {
+    //                     callback(false, response.data);
+    //                 })
+    //                 .catch(error => {
+    //                     callback(true, error);
+    //                 });
+    //         }
+    //     };
+    // },
 });
