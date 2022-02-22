@@ -4,6 +4,8 @@
 use App\Events\Message;
 use App\Http\Controllers\friendsController;
 use App\Http\Controllers\chatController;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\profileController;
 use App\Events\PrivateMessage;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -32,12 +34,22 @@ Route::get('/dashboard', function () {
 
 Route::resource('/friends', friendsController::class)->middleware('auth');
 
+//Route::get('/profile', profileController::class)->middleware('auth');
+
 Route::get('/friends/{id}/chat', [chatController::class, 'chat' ])->middleware(['auth', 'checkChat']);
 
-//Route::get('/chat', function(){
-//    return view('chat');
-//})->middleware(['auth'])->name('chat');
-//
+Route::get('/chat', function(){
+    return view('publicChat');
+})->middleware(['auth'])->name('chat');
+
+Route::get('/myProfile', [userController::class, 'myProfile'])->middleware(['auth']);
+Route::get('/searchUser', [userController::class, 'searchUser'])->middleware(['auth']);
+route::get('/search', function(){
+    return view('search');
+});
+
+Route::post('/uploadimage', [profileController::class, 'uploadImage'])->middleware(['auth']);
+
 //Route::get('/friend_request', [requestController::class, 'index' ])
 //    ->middleware(['auth'])->name('friend_request');
 
@@ -51,16 +63,16 @@ Route::get('/friends/{id}/chat', [chatController::class, 'chat' ])->middleware([
 
 //Route::get('/friends', FriendsController::class, 'show')->middleware(['auth']);
 
-//Route::post('/send-message', function(Request $request){
-//    event(
-//        new Message(
-//            $request->input('username'),
-//            $request->input('message')
-//        )
-//    );
-//
-//    return ["success" => true];
-//});
+Route::post('/send-Message', function(Request $request){
+    event(
+        new Message(
+            $request->input('username'),
+            $request->input('message')
+        )
+    );
+
+    return ["success" => true];
+});
 
 Route::post('/send-privateMessage', function(Request $request){
     event(

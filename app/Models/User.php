@@ -22,6 +22,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image_path'
+    ];
+
+    protected $validate = [
+        'image'=> 'mimes:jpg,png,jpeg|max:5048'
     ];
 
     protected $primaryKey = 'id';
@@ -44,6 +49,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $timestamps = false;
 
     public function friends()
     {

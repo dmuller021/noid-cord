@@ -1,3 +1,17 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.lala {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
+}
+
+
+.card_Class{
+    width: 18rem !important;
+}

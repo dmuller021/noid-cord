@@ -65,3 +65,5 @@ window.Echo.channel('friends.'+friends_input.value)
         message_input.innerHTML = '<div class="messsage_input" value=""></div>'
         console.log(e);
     })
+
+
