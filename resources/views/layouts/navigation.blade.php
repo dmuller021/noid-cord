@@ -25,6 +25,12 @@
 {{--                </div>--}}
                     <a href="/friends">Friends</a>
 
+                <a href="/myProfile">My Profile</a>
+
+                <a href="/chat">General chat</a>
+
+                <a href="/search">Search a user</a>
+
             </div>
 
             <!-- Settings Dropdown -->

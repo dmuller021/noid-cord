@@ -3,28 +3,28 @@
 
 @section('content')
 
-    <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Chat') }}
-            </h2>
-        </x-slot>
-
-<h1>Let's chat!</h1>
-<div>
-    <header>
-    <input type="hidden" name="username" id="username" placeholder="username" value="{{ Auth::user()->name }}">
+    <div>
+        <header>
+            <input type="hidden" name="username_general" id="username_general" placeholder="username" value="{{ Auth::user()->name }}">
+            <br>
+        </header>
+    </div>
     <br>
-    </header>
-</div>
-<br>
-<div id="messages"></div>
-    <form id="message_form">
-        <input type="text" name="message" id="message_input" onfocus="this.value=''" placeholder="type a message...">
-        <button type="submit" id="message_send">Send message</button>
+    <div id="messages_general"></div>
+    <br>
+    <br>
+    <form id="message_form_general">
+        <input type="text" autocomplete="off" name="Message" id="Message" placeholder="type a message...">
+        <button type="submit" onclick="clear()" id="message_send">Send message</button>
     </form>
-</div>
+    </div>
 
-    </x-app-layout>
+    <script>
+        function clear() {
+            document.getElementById("message_form_general").reset();
+        }
+    </script>
+    <script src="{{ asset('js/chat.js') }}" defer></script>
+
 
 @endsection
