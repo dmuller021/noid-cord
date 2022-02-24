@@ -13,7 +13,7 @@
                             <h5 class="my-3">John</h5>
                             <form action="/uploadimage" method="POST" enctype="multipart/form-data">
                                 @csrf
-                            <input type="file" name="image">
+                            <input type="file" name="image" required>
                             <button type="submit" class="btn btn-primary">upload</button>
                             </form>
                         </div>

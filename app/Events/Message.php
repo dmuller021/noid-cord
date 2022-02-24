@@ -16,15 +16,17 @@ class Message implements ShouldBroadcast
 
     public $username;
     public $message;
+    public $image;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username, $message)
+    public function __construct($username, $message, $image)
     {
         $this->username = $username;
         $this->message = $message;
+        $this->image = $image;
     }
 
     /**
