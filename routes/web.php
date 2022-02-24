@@ -38,10 +38,7 @@ Route::resource('/friends', friendsController::class)->middleware('auth');
 
 Route::get('/friends/{id}/chat', [chatController::class, 'chat' ])->middleware(['auth', 'checkChat']);
 
-Route::get('/chat', function(){
-    return view('publicChat');
-})->middleware(['auth'])->name('chat');
-
+Route::get('/chat', [userController::class, 'chatImage'])->middleware(['auth']);
 Route::get('/myProfile', [userController::class, 'myProfile'])->middleware(['auth']);
 Route::get('/searchUser', [userController::class, 'searchUser'])->middleware(['auth']);
 route::get('/search', function(){
@@ -67,7 +64,8 @@ Route::post('/send-Message', function(Request $request){
     event(
         new Message(
             $request->input('username'),
-            $request->input('message')
+            $request->input('message'),
+            $request->input('image')
         )
     );
 

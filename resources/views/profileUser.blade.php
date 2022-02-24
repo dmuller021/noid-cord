@@ -9,7 +9,7 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="{{ asset('assets/images/php_ceo.jpeg') }}" alt="avatar" class="rounded-circle mx-auto">
+                        <img src="{{ asset('assets/images/'.$user->image_path) }}" alt="avatar" class="rounded-circle mx-auto">
                         <h5 class="my-3">John Smith</h5>
                         <div class="d-flex justify-content-center mb-2">
                             <button type="button" class="btn btn-outline-primary ms-1">Send friend request</button>

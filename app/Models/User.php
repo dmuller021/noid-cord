@@ -26,7 +26,7 @@ class User extends Authenticatable
     ];
 
     protected $validate = [
-        'image'=> 'mimes:jpg,png,jpeg|max:5048'
+        'image'=> 'required|mimes:jpg,png,jpeg|max:5048'
     ];
 
     protected $primaryKey = 'id';
