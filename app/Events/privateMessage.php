@@ -19,17 +19,19 @@ class privateMessage implements ShouldBroadcast
     public $friendID;
     public $user;
     public $privateMessage;
+    public $image;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user, $privateMessage, $friendID)
+    public function __construct($user, $privateMessage, $friendID, $image)
     {
         $this->user = $user;
         $this->privateMessage = $privateMessage;
         $this->friendID = $friendID;
+        $this->image = $image;
     }
 
     /**

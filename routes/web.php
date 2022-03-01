@@ -77,7 +77,8 @@ Route::post('/send-privateMessage', function(Request $request){
         new privateMessage(
             $request->input('user'),
             $request->input('privateMessage'),
-            $request->input('friendID')
+            $request->input('friendID'),
+            $request->input('image')
         )
     );
 

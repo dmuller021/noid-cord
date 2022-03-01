@@ -5454,6 +5454,7 @@ alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 var token = document.head.querySelector('meta[name="csrf-token"]');
 var friends_input = document.getElementById("friendID");
 var messages_el = document.getElementById("messages");
+var image_input = document.getElementById("image");
 var username_input = document.getElementById("username");
 var message_input = document.getElementById("privateMessage");
 var message_form = document.getElementById("message_form"); // var privateChannel = pusher.subscribe("friends.")
@@ -5465,17 +5466,17 @@ function clear() {
 console.log(friends_input);
 console.log(message_input);
 console.log(username_input);
+console.log(image_input);
 message_form.addEventListener('submit', function (e) {
   e.preventDefault();
   var has_errors = false;
 
-  if (username_input.value == null) {
+  if (username_input.value == '') {
     alert("Please enter a username");
     has_errors = true;
   }
 
-  if (message_input.value == null) {
-    alert("Please enter a message");
+  if (message_input.value == '') {
     has_errors = true;
   }
 
@@ -5488,15 +5489,16 @@ message_form.addEventListener('submit', function (e) {
     url: '/send-privateMessage',
     data: {
       user: username_input.value,
+      privateMessage: message_input.value,
       friendID: friends_input.value,
-      privateMessage: message_input.value
+      image: image_input.value
     }
   };
   axios(options);
 });
-window.Echo.channel('friends.' + friends_input.value).listen('.DM', function (e) {
-  messages_el.innerHTML += '<div class="messages"><strong>' + e.user + ': </strong> ' + e.privateMessage + '</div>', message_input.innerHTML = '<div class="messsage_input" value=""></div>';
-  console.log(e);
+window.Echo.channel('friends.' + friends_input.value).listen('.DM', function (data) {
+  messages_el.innerHTML += "\n\n            <div class=\"row mb-4\">\n                <div class=\"small_image col-1\" style=\"background-image: url( ".concat(data.image, " )\"></div>\n                    <div class=\"flex-grow-2 ms-1 col-9\">\n                        <strong><h5 class=\"mt-0\">").concat(data.user, ":</h5></strong>\n\n                        <div>\n                            <div class=\"flex-grow-2 ms-2\">\n                                <p>").concat(data.privateMessage, "</p>\n                            </div>\n                       </div>\n                    </div>\n\n            </div>\n\n    ");
+  messages_el.scrollTop = messages_el.scrollHeight;
 });
 
 /***/ }),
