@@ -29167,13 +29167,12 @@ message_form_general.addEventListener('submit', function (a) {
   a.preventDefault();
   var has_errors = false;
 
-  if (username_input_general.value == null) {
+  if (username_input_general.value == '') {
     alert("Please enter a username");
     has_errors = true;
   }
 
-  if (message_input_general.value == null) {
-    alert("Please enter a message");
+  if (message_input_general.value == '') {
     has_errors = true;
   }
 
@@ -29192,8 +29191,9 @@ message_form_general.addEventListener('submit', function (a) {
   };
   axios(options);
 });
-window.Echo.channel('chat').listen('.message', function (data) {
-  messages_el_general.innerHTML += "\n\n            <div class=\"row mb-4\">\n                <div class=\"small_image col-4\" style=\"background-image: url( ".concat(data.image, " )\"></div>\n                    <div class=\"flex-grow-2 ms-1 col-1 mt-3\">\n                        <strong><h5 class=\"mt-0\">").concat(data.username, ":</h5></strong>\n                    </div>\n                        <div class=\"col-7\">\n                            <div class=\"flex-grow-2 ms-2 mt-3\">\n                                <p>").concat(data.message, "</p>\n                            </div>\n                       </div>\n            </div>\n\n    ");
+window.Echo.channel('chat').listen('.messages', function (data) {
+  messages_el_general.innerHTML += "\n\n            <div class=\"row mb-4\">\n                <div class=\"small_image col-1\" style=\"background-image: url( ".concat(data.image, " )\"></div>\n                    <div class=\"flex-grow-2 ms-1 col-9\">\n                        <strong><h5 class=\"mt-0\">").concat(data.username, ":</h5></strong>\n\n                        <div>\n                            <div class=\"flex-grow-2\">\n                                <p>").concat(data.message, "</p>\n                            </div>\n                       </div>\n                    </div>\n\n            </div>\n    ");
+  messages_el_general.scrollTop = messages_el_general.scrollHeight;
 });
 })();
 

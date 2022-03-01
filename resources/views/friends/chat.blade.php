@@ -3,7 +3,6 @@
 
 @section('content')
 
-    <h1>Let's chat!</h1>
 
 
 {{--        {{ dd($friends) }}--}}
@@ -26,12 +25,15 @@
         </header>
     </div>
     <br>
-    <div id="messages"></div>
+    <div id="messages" class="messages_general h-20 justify-center mx-auto mb-4"></div>
     <br>
     <br>
     <form id="message_form">
-        <input type="text" autocomplete="off" name="privateMessage" id="privateMessage" placeholder="type a message...">
-        <button type="submit" onclick="clear()" id="message_send">Send message</button>
+       <div class="text-center">
+        <input type="text"  class="input_class" autocomplete="off" name="privateMessage" id="privateMessage" placeholder="type a message...">
+        <input type="hidden" name="image" id="image" value="{{ asset ( url( 'assets/images/'.Auth::user()->image_path) ) }}">
+        <button class="text-align" type="submit" onclick="clear()" id="message_send">Send message</button>
+       </div>
     </form>
     </div>
 

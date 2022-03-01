@@ -17,14 +17,15 @@
         <div class="text-center">
         <input type="hidden" name="image" id="image" value="{{ asset ( url( 'assets/images/'.Auth::user()->image_path) )  }}">
         <input type="text" class="input_class" autocomplete="off" name="Message" id="Message" placeholder="type a message...">
-        <button class="text-align" type="submit" onclick="clear()" id="message_send">Send message</button>
+        <input class="text-align" type="submit" onclick="clear()" id="message_send"></input>
         </div>
     </form>
     </div>
 
     <script>
         function clear() {
-            document.getElementById("message_form_general").reset();
+            document.message_form_general.submit();
+            document.message_form_general.reset();
         }
     </script>
     <script src="{{ asset('js/chat.js') }}" defer></script>

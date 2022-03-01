@@ -9,7 +9,10 @@ class profileController extends Controller
 {
     public function uploadImage(Request $request){
 
-        $newimage = time() . '-' . $request->user()->name . '.' . $request->image->extension();
+//        $newimage = time() . '-' . $request->user()->name . '.' . $request->image->extension();
+
+        $newimage = hash_file('sha512', $request->image);
+
 
         $request->image->move(public_path('assets/images'), $newimage);
 

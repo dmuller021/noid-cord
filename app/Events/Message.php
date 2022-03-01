@@ -40,6 +40,6 @@ class Message implements ShouldBroadcast
     }
 
     public function broadcastAs() {
-        return 'message';
+        return 'messages';
     }
 }

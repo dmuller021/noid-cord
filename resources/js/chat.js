@@ -7,7 +7,7 @@ window.Alpine = Alpine;
 Alpine.start();
 
 
-const messages_el_general = document.getElementById("messages_general");
+var messages_el_general = document.getElementById("messages_general");
 const image_input_general = document.getElementById("image");
 const username_input_general = document.getElementById("username_general");
 const message_input_general = document.getElementById("Message");
@@ -23,13 +23,12 @@ message_form_general.addEventListener('submit', function (a) {
 
     let has_errors = false;
 
-    if (username_input_general.value == null) {
+    if (username_input_general.value == '') {
         alert("Please enter a username");
         has_errors = true;
     }
 
-    if (message_input_general.value == null) {
-        alert("Please enter a message");
+    if (message_input_general.value == '') {
         has_errors = true;
     }
 
@@ -54,22 +53,27 @@ message_form_general.addEventListener('submit', function (a) {
 
 
 
-window.Echo.channel('chat').listen('.message', (data) => {
+window.Echo.channel('chat').listen('.messages', (data) => {
 
     messages_el_general.innerHTML += `
 
             <div class="row mb-4">
-                <div class="small_image col-4" style="background-image: url( ${data.image} )"></div>
-                    <div class="flex-grow-2 ms-1 col-1 mt-3">
+                <div class="small_image col-1" style="background-image: url( ${data.image} )"></div>
+                    <div class="flex-grow-2 ms-1 col-9">
                         <strong><h5 class="mt-0">${data.username}:</h5></strong>
-                    </div>
-                        <div class="col-7">
-                            <div class="flex-grow-2 ms-2 mt-3">
+
+                        <div>
+                            <div class="flex-grow-2">
                                 <p>${data.message}</p>
                             </div>
                        </div>
-            </div>
+                    </div>
 
+            </div>
     `;
 
+    messages_el_general.scrollTop = messages_el_general.scrollHeight
+
 });
+
+
