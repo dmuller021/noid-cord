@@ -12,6 +12,13 @@ class userController extends Controller
 
 //        dd($test);
 
+        if($test == "") {
+            return redirect ('search');
+        }
+        else if ($test == "%"){
+            return redirect('search');
+        }
+
         $query = User::select()
             ->where('name', 'LIKE', '%'.$test.'%')
             ->get();

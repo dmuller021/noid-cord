@@ -20,7 +20,7 @@
 
     <div>
         <header>
-            <input type="hidden" name="username" id="username" placeholder="username" value="{{ Auth::user()->name }}">
+            <input type="hidden" name="username" id="username" placeholder="username" value="{{ Auth::user()->username }}">
             <br>
         </header>
     </div>

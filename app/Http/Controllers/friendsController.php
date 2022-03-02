@@ -21,7 +21,7 @@ class friendsController extends Controller
 
         $friends = friends::join( 'users AS user1', 'user1.id', '=', 'user_id_1')
             ->join('users AS user2', 'user2.id', '=', 'user_id_2')
-            ->select('user1.name AS name1', 'user2.name AS name2', 'user_id_1', 'user_id_2', 'friends.id AS id')
+            ->select('user1.username AS username1', 'user2.username AS username2', 'user1.image_path AS image1', 'user2.image_path AS image2', 'user_id_1', 'user_id_2', 'friends.id AS id')
             ->where('user_id_1', '=', $id)->orWhere('user_id_2', '=', $id)
             ->get();
 

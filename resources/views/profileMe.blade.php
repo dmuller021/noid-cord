@@ -10,7 +10,7 @@
                     <div class="card mb-4">
                         <div class="card-body text-center">
                             <div class="lala mx-auto" style="background-image: url( {{ asset('assets/images/'.$select->image_path) }} )"></div>
-                            <h5 class="my-3">{{ $select->name }}</h5>
+                            <h5 class="my-3">{{ $select->username }}</h5>
                             <form action="/uploadimage" method="POST" enctype="multipart/form-data">
                                 @csrf
                             <input type="file" name="image" required>

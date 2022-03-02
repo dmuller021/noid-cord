@@ -47,6 +47,8 @@ route::get('/search', function(){
 
 Route::post('/uploadimage', [profileController::class, 'uploadImage'])->middleware(['auth']);
 
+Route::get('/user/{id}', [profileController::class, 'view_user'])->middleware(['auth']);
+
 //Route::get('/friend_request', [requestController::class, 'index' ])
 //    ->middleware(['auth'])->name('friend_request');
 
