@@ -5,14 +5,17 @@
     {{--    <section style="background-color: #eee;">--}}
     <div class="container py-5">
 
+        @foreach($view as $user)
         <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="{{ asset('assets/images/'.$user->image_path) }}" alt="avatar" class="rounded-circle mx-auto">
-                        <h5 class="my-3">John Smith</h5>
+                        <div class="lala mx-auto" style="background-image: url( {{ asset('assets/images/'.$user->image_path) }} )"></div>
+                        <h5 class="my-3">{{ $user->name }}</h5>
                         <div class="d-flex justify-content-center mb-2">
+                             <form method="post" action="friends/friend_request">
                             <button type="button" class="btn btn-outline-primary ms-1">Send friend request</button>
+                             </form>
                             {{--                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>--}}
                         </div>
                     </div>
@@ -26,7 +29,7 @@
                                 <p class="mb-0">Full Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">PHP CEO</p>
+                                <p class="text-muted mb-0">{{ $user->name }}</p>
                             </div>
                         </div>
                         <hr>
@@ -35,7 +38,7 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">PHPCEO@OUTLOOK.COM</p>
+                                <p class="text-muted mb-0">{{ $user->email }}</p>
                             </div>
                         </div>
                         <hr>
@@ -55,7 +58,7 @@
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush rounded-3">
                             <i class="fas fa-globe fa-lg text-warning"></i>
-                            <p class="mb-0">THE ONLY WAY TO GET ACCEPTED IS IF YOU ONLY WORK WITH PHP...HIGHER CHANCES OF GETTING AN ACCEPTED FRIEND REQUEST IF YOU KNOW HOW TO WORK WITH PHPMYADMIN</p>
+                            <p class="mb-0">Description</p>
                         </ul>
                     </div>
                 </div>
@@ -63,7 +66,7 @@
         </div>
     </div>
 
-
+    @endforeach
 
 
 @endsection

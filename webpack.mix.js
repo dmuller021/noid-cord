@@ -15,4 +15,5 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('postcss-import'),
     require('tailwindcss'),
     require('autoprefixer'),
-]).js('resources/js/chat.js', 'public/js');
+]).js('resources/js/chat.js', 'public/js')
+    .js('resources/js/test.js', 'public/js');

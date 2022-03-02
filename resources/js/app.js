@@ -73,7 +73,7 @@ window.Echo.channel('friends.'+friends_input.value).listen('.DM', (data) => {
                         <strong><h5 class="mt-0">${data.user}:</h5></strong>
 
                         <div>
-                            <div class="flex-grow-2 ms-2">
+                            <div class="flex-grow-2">
                                 <p>${data.privateMessage}</p>
                             </div>
                        </div>
@@ -85,6 +85,7 @@ window.Echo.channel('friends.'+friends_input.value).listen('.DM', (data) => {
 
     messages_el.scrollTop = messages_el.scrollHeight
 
+    message_input.value = "";
 
 });
 

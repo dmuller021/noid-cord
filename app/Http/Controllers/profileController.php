@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class profileController extends Controller
 {
@@ -24,5 +25,26 @@ class profileController extends Controller
         ]);
 
         return redirect('myProfile');
+    }
+
+    public function view_user(Request $request){
+        $view = User::all()
+        ->where('id', $request->route('id'));
+
+//        dd($view);
+
+        return view ('profileUser')
+            ->with('view', $view);
+
+    }
+
+    public function friend_request(Request $request){
+        $friend_request = DB::table('friend_request')
+            ->insert([
+                'user_id_1' => $request->user()->id,
+                'user_id_2' => $request->input('id')
+            ]);
+
+        return view('friends.user');
     }
 }

@@ -12,7 +12,9 @@ const image_input_general = document.getElementById("image");
 const username_input_general = document.getElementById("username_general");
 const message_input_general = document.getElementById("Message");
 const message_form_general = document.getElementById("message_form_general");
+
 // var privateChannel = pusher.subscribe("friends.")
+
 
 
 console.log(message_input_general);
@@ -74,6 +76,13 @@ window.Echo.channel('chat').listen('.messages', (data) => {
 
     messages_el_general.scrollTop = messages_el_general.scrollHeight
 
+
+        message_input_general.value = "";
+
+
 });
+
+
+
 
 
