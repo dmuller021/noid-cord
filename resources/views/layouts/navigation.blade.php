@@ -17,19 +17,33 @@
                     </x-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('friends')" :active="request()->routeIs('friends')">
+                        {{ __('Friends') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('chat')" :active="request()->routeIs('chat')">
+                        {{ __('Chat') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('search')" :active="request()->routeIs('search')">
+                        {{ __('Search a user') }}
+                    </x-nav-link>
+                </div>
+
 {{--                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">--}}
 {{--                    <x-nav-link :href="route('chat')" :active="request()->routeIs('chat')">--}}
 {{--                        {{ __('Chat') }}--}}
 {{--                    <a href="/chat">Chat</a>--}}
 {{--                    </x-nav-link>--}}
 {{--                </div>--}}
-                    <a href="/friends">Friends</a>
+{{--                    <a href="/friends">Friends</a>--}}
 
-                <a href="/myProfile">My Profile</a>
 
-                <a href="/chat">General chat</a>
-
-                <a href="/search">Search a user</a>
 
             </div>
 
@@ -49,6 +63,11 @@
                     </x-slot>
 
                     <x-slot name="content">
+
+                        <x-dropdown-link :href="route('myProfile')">
+                            {{ __('My Profile') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -98,6 +117,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -11,7 +11,7 @@
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         <div class="lala mx-auto" style="background-image: url( {{ asset('assets/images/'.$user->image_path) }} )"></div>
-                        <h5 class="my-3">{{ $user->name }}</h5>
+                        <h5 class="my-3">{{ $user->username }}</h5>
                         <div class="d-flex justify-content-center mb-2">
                              <form method="post" action="friends/friend_request">
                             <button type="button" class="btn btn-outline-primary ms-1">Send friend request</button>

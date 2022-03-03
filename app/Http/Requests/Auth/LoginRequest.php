@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
+use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+
 
 class LoginRequest extends FormRequest
 {
@@ -26,7 +28,7 @@ class LoginRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
             'username' => ['required', 'string'],

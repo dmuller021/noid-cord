@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class profileController extends Controller
 {
+    //upload and hashing the image in folder and hashed filename to database
     public function uploadImage(Request $request){
 
-//        $newimage = time() . '-' . $request->user()->name . '.' . $request->image->extension();
-
+        //hasshing the image
         $newimage = hash_file('sha512', $request->image);
 
 
+        //moving the image to the images folder in the public/assets directory
         $request->image->move(public_path('assets/images'), $newimage);
 
-//        dd($newimage);
-
+        //Updating the hashed image to database
         $upload = User::where('id', $request->user()->id)
         ->update([
             'image_path'    => $newimage
@@ -27,9 +27,9 @@ class profileController extends Controller
         return redirect('myProfile');
     }
 
+    // Fetch user by username...
     public function view_user(Request $request){
-        $view = User::all()
-        ->where('id', $request->route('id'));
+        $view = User::where('username', $request->route('username'));
 
 //        dd($view);
 
@@ -38,6 +38,7 @@ class profileController extends Controller
 
     }
 
+    //Send a friend request button (which is currently still not working)
     public function friend_request(Request $request){
         $friend_request = DB::table('friend_request')
             ->insert([
