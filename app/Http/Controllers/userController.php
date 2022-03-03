@@ -20,7 +20,7 @@ class userController extends Controller
         }
 
         $query = User::select()
-            ->where('name', 'LIKE', '%'.$test.'%')
+            ->where('username', 'LIKE', '%'.$test.'%')
             ->get();
 
         return view('search')

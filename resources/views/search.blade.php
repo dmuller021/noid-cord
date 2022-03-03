@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <div class="container mb-4">
+    <div class="container mb-4 text-center">
         <div class="col-lg-4 col-lg-offset-4">
             <div class="justify-center">
                 <form action="{{ url('/searchUser') }}" type="get">
-              <input name="searchUser" class="form-control mb-2" value="">
+              <input name="searchUser" class="form-control mb-2 mx-auto" value="">
               <button class="btn btn-primary" type="submit">Search</button>
                 </form>
             </div>
@@ -24,9 +24,9 @@
         <div class="profile">
             <div class="card mb-4 card_Class text-center">
                 <div class="lala mx-auto mb-3" style="background-image: url( {{ asset('assets/images/'.$user->image_path) }} )"></div>
-                <div class="col">{{ $user->name }}</div>
+                <div class="col">{{ $user->username }}</div>
                 {{ $user->description }}
-                <a href="/user/{{ $user->id }}" class="btn btn-primary">View profile</a>
+                <a href="/user/{{ $user->username }}" class="btn btn-primary">View profile</a>
             </div>
         </div>
     </div>
