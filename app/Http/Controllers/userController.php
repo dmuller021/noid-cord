@@ -20,20 +20,11 @@ class userController extends Controller
         }
 
         $query = User::select()
-            ->where('username', 'LIKE', '%'.$test.'%')
+            ->where('username', 'LIKE', '%'.$test.'%',)
             ->get();
 
         return view('search')
             ->with('searchedUser', $query);
-    }
-
-    public function myProfile(Request $request){
-
-        $select = User::where('id', $request->user()->id)
-        ->first();
-
-        return view('profileMe')
-            ->with('select', $select);
     }
 
     public function chatImage (Request $request){

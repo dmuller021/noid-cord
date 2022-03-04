@@ -35,43 +35,29 @@ Route::group(['middleware' => 'auth'], function()  {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/myProfile', [userController::class, 'myProfile'])->name('myProfile');
+    Route::get('/myProfile', function () {
+        return view('profileMe');
+    })->name('myProfile');
+
     Route::get('/chat', [userController::class, 'chatImage'])->name('chat');
     Route::resource('friends', friendsController::class, [
         'names' => [
             'index' => 'friends'
         ]
     ]);
+
     route::get('/search', function(){
         return view('search');
     })->name('search');
-
     Route::get('/searchUser', [userController::class, 'searchUser']);
+
+
+    Route::post('/uploadimage', [profileController::class, 'uploadImage']);
+    Route::get('/user/{username}', [profileController::class, 'view_user']);
 });
-
-
-
 
 Route::get('/friends/{id}/chat', [chatController::class, 'chat' ])->middleware(['auth', 'checkChat']);
 
-
-
-Route::post('/uploadimage', [profileController::class, 'uploadImage'])->middleware(['auth']);
-
-Route::get('/user/{username}', [profileController::class, 'view_user'])->middleware(['auth']);
-
-//Route::get('/friend_request', [requestController::class, 'index' ])
-//    ->middleware(['auth'])->name('friend_request');
-
-
-
-//Route::get('/friends.friend' [])
-//
-//Route::get('friends/{id}.edit', function (id $id) {
-// //
-//});
-
-//Route::get('/friends', FriendsController::class, 'show')->middleware(['auth']);
 
 Route::post('/send-Message', function(Request $request){
     event(
