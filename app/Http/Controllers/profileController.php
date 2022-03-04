@@ -29,7 +29,8 @@ class profileController extends Controller
 
     // Fetch user by username...
     public function view_user(Request $request){
-        $view = User::where('username', $request->route('username'));
+        $view = User::where('username', $request->route('username'))
+        ->get();
 
 //        dd($view);
 

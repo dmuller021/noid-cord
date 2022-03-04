@@ -13,9 +13,11 @@
                         <div class="lala mx-auto" style="background-image: url( {{ asset('assets/images/'.$user->image_path) }} )"></div>
                         <h5 class="my-3">{{ $user->username }}</h5>
                         <div class="d-flex justify-content-center mb-2">
+                            @if($user->id != Auth::user()->id)
                              <form method="post" action="friends/friend_request">
                             <button type="button" class="btn btn-outline-primary ms-1">Send friend request</button>
                              </form>
+                            @endif
                             {{--                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>--}}
                         </div>
                     </div>

@@ -39,6 +39,8 @@ class privateMessage implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
+
+    //channel name
     public function broadcastOn()
     {
         return new Channel('friends.'.$this->friendID);
