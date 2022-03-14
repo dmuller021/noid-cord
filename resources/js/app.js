@@ -15,11 +15,8 @@ const image_input = document.getElementById("image");
 const username_input = document.getElementById("username");
 const message_input = document.getElementById("privateMessage");
 const message_form = document.getElementById("message_form");
-// var privateChannel = pusher.subscribe("friends.")
 
-function clear() {
-    document.getElementById("message_form").reset();
-}
+
 
 
 console.log(friends_input);
@@ -47,14 +44,20 @@ message_form.addEventListener('submit', function (e) {
         return;
     }
 
+    // tags are being replace with an empty value function
+    function stripTags (original) {
+        return original.replace(/(<([^>]+)>)/gi, '');
+    }
 
+    // variable for message input without html tags made
+    var cleaned = stripTags(message_input.value);
 
     const options = {
         method: 'post',
         url: '/send-privateMessage',
         data: {
             user: username_input.value,
-            privateMessage: message_input.value,
+            privateMessage: cleaned,
             friendID: friends_input.value,
             image: image_input.value
         }
