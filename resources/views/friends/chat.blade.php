@@ -2,10 +2,7 @@
 
 
 @section('content')
-
-
-
-{{--        {{ dd($friends) }}--}}
+    
     <div>
         <header>
             @foreach($friends as $friend)
