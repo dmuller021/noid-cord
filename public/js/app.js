@@ -5457,12 +5457,7 @@ var messages_el = document.getElementById("messages");
 var image_input = document.getElementById("image");
 var username_input = document.getElementById("username");
 var message_input = document.getElementById("privateMessage");
-var message_form = document.getElementById("message_form"); // var privateChannel = pusher.subscribe("friends.")
-
-function clear() {
-  document.getElementById("message_form").reset();
-}
-
+var message_form = document.getElementById("message_form");
 console.log(friends_input);
 console.log(message_input);
 console.log(username_input);
@@ -5482,14 +5477,21 @@ message_form.addEventListener('submit', function (e) {
 
   if (has_errors) {
     return;
-  }
+  } // tags are being replace with an empty value function
 
+
+  function stripTags(original) {
+    return original.replace(/(<([^>]+)>)/gi, '');
+  } // variable for message input without html tags made
+
+
+  var cleaned = stripTags(message_input.value);
   var options = {
     method: 'post',
     url: '/send-privateMessage',
     data: {
       user: username_input.value,
-      privateMessage: message_input.value,
+      privateMessage: cleaned,
       friendID: friends_input.value,
       image: image_input.value
     }
