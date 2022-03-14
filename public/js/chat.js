@@ -29159,10 +29159,9 @@ var messages_el_general = document.getElementById("messages_general");
 var image_input_general = document.getElementById("image");
 var username_input_general = document.getElementById("username_general");
 var message_input_general = document.getElementById("Message");
-var message_form_general = document.getElementById("message_form_general"); // var privateChannel = pusher.subscribe("friends.")
+var message_form_general = document.getElementById("message_form_general");
+console.log(username_input_general); //event listener
 
-console.log(message_input_general);
-console.log(username_input_general);
 message_form_general.addEventListener('submit', function (a) {
   a.preventDefault();
   var has_errors = false;
@@ -29178,22 +29177,31 @@ message_form_general.addEventListener('submit', function (a) {
 
   if (has_errors) {
     return;
-  }
+  } // tags are being replace with an empty value function
 
+
+  function stripTags(original) {
+    return original.replace(/(<([^>]+)>)/gi, '');
+  } // variable for message input without html tags made
+
+
+  var cleaned = stripTags(message_input_general.value);
   var options = {
     method: 'post',
     url: '/send-Message',
     data: {
       username: username_input_general.value,
-      message: message_input_general.value,
+      message: cleaned,
       image: image_input_general.value
     }
   };
   axios(options);
 });
 window.Echo.channel('chat').listen('.messages', function (data) {
-  messages_el_general.innerHTML += "\n\n            <div class=\"row mb-4\">\n                <div class=\"small_image col-1\" style=\"background-image: url( ".concat(data.image, " )\"></div>\n                    <div class=\"flex-grow-2 ms-1 col-9\">\n                        <strong><h5 class=\"mt-0\">").concat(data.username, ":</h5></strong>\n\n                        <div>\n                            <div class=\"flex-grow-2\">\n                                <p>").concat(data.message, "</p>\n                            </div>\n                       </div>\n                    </div>\n\n            </div>\n    ");
-  messages_el_general.scrollTop = messages_el_general.scrollHeight;
+  messages_el_general.innerHTML += "\n\n            <div class=\"row mb-4\">\n                <div class=\"small_image col-1\" style=\"background-image: url( ".concat(data.image, " )\"></div>\n                    <div class=\"flex-grow-2 ms-1 col-9\">\n                        <strong><h5 class=\"mt-0\">").concat(data.username, ":</h5></strong>\n\n                        <div>\n                            <div class=\"flex-grow-2\">\n                                <p>").concat(data.message, "</p>\n                            </div>\n                       </div>\n                    </div>\n\n            </div>\n    "); //scrollbar will automatically scroll down when a new message has been outputted
+
+  messages_el_general.scrollTop = messages_el_general.scrollHeight; // empty output when string is empty
+
   message_input_general.value = "";
 });
 })();

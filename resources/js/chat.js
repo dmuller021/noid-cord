@@ -10,16 +10,17 @@ Alpine.start();
 var messages_el_general = document.getElementById("messages_general");
 const image_input_general = document.getElementById("image");
 const username_input_general = document.getElementById("username_general");
-const message_input_general = document.getElementById("Message");
+var message_input_general = document.getElementById("Message");
 const message_form_general = document.getElementById("message_form_general");
 
-// var privateChannel = pusher.subscribe("friends.")
 
 
 
-console.log(message_input_general);
 console.log(username_input_general);
 
+
+
+//event listener
 message_form_general.addEventListener('submit', function (a) {
     a.preventDefault();
 
@@ -38,6 +39,13 @@ message_form_general.addEventListener('submit', function (a) {
         return;
     }
 
+ // tags are being replace with an empty value function
+    function stripTags (original) {
+        return original.replace(/(<([^>]+)>)/gi, '');
+    }
+
+    // variable for message input without html tags made
+    var cleaned = stripTags(message_input_general.value);
 
 
     const options = {
@@ -45,7 +53,7 @@ message_form_general.addEventListener('submit', function (a) {
         url: '/send-Message',
         data: {
             username: username_input_general.value,
-            message: message_input_general.value,
+            message: cleaned,
             image: image_input_general.value
         }
     }
@@ -74,10 +82,13 @@ window.Echo.channel('chat').listen('.messages', (data) => {
             </div>
     `;
 
+    //scrollbar will automatically scroll down when a new message has been outputted
     messages_el_general.scrollTop = messages_el_general.scrollHeight
 
-
+        // empty output when string is empty
         message_input_general.value = "";
+
+
 
 
 });
