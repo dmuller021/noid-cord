@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function friends()
     {
-        return $this->hasMany('friends');
+        return $this->hasMany(friends::class);
     }
 
 //    public function messages()
