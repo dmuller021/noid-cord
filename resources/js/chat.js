@@ -16,6 +16,7 @@ const message_form_general = document.getElementById("message_form_general");
 
 
 
+
 console.log(username_input_general);
 
 
@@ -85,7 +86,7 @@ window.Echo.channel('chat').listen('.messages', (data) => {
     //scrollbar will automatically scroll down when a new message has been outputted
     messages_el_general.scrollTop = messages_el_general.scrollHeight
 
-        // empty output when string is empty
+        // outputs nothing when string is empty
         message_input_general.value = "";
 
 
