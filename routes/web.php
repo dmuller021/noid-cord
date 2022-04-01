@@ -46,6 +46,10 @@ Route::group(['middleware' => 'auth'], function()  {
         ]
     ]);
 
+    Route::get('/friend_request', function () {
+        return view('friends.request');
+    })->name('friend_request');
+
     route::get('/search', function(){
         return view('search');
     })->name('search');
