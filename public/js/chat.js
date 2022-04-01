@@ -29200,7 +29200,7 @@ message_form_general.addEventListener('submit', function (a) {
 window.Echo.channel('chat').listen('.messages', function (data) {
   messages_el_general.innerHTML += "\n\n            <div class=\"row mb-4\">\n                <div class=\"small_image col-1\" style=\"background-image: url( ".concat(data.image, " )\"></div>\n                    <div class=\"flex-grow-2 ms-1 col-9\">\n                        <strong><h5 class=\"mt-0\">").concat(data.username, ":</h5></strong>\n\n                        <div>\n                            <div class=\"flex-grow-2\">\n                                <p>").concat(data.message, "</p>\n                            </div>\n                       </div>\n                    </div>\n\n            </div>\n    "); //scrollbar will automatically scroll down when a new message has been outputted
 
-  messages_el_general.scrollTop = messages_el_general.scrollHeight; // empty output when string is empty
+  messages_el_general.scrollTop = messages_el_general.scrollHeight; // outputs nothing when string is empty
 
   message_input_general.value = "";
 });

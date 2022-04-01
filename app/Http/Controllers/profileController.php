@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\friends;
 use Illuminate\Support\Facades\DB;
 
 class profileController extends Controller
@@ -30,12 +31,28 @@ class profileController extends Controller
     // Fetch user by username...
     public function view_user(Request $request){
         $view = User::where('username', $request->route('username'))
-        ->get();
+        ->first();
 
-//        dd($view);
+//        $friends = friends::where('user_id_1', '=', $view->id)
+//            ->orWhere('user_id_2', '=', $view->id)
+//
+//            ->where('user_id_1', '=', $request->user()->id)
+//            ->orWhere('user_id_2', '=', $request->user()->id)
+//
+//        ->first();
+
+
+        $friends = friends::join( 'users AS user1', 'user1.id', '=', 'user_id_1')
+            ->join('users AS user2', 'user2.id', '=', 'user_id_2')
+            ->select('user1.username AS username1', 'user2.username AS username2', 'user1.image_path AS image1', 'user2.image_path AS image2', 'user_id_1', 'user_id_2', 'friends.id AS id')
+            ->where('user_id_1', '=', $view->id)->where('user_id_2', '=', $request->user()->id)
+            ->orWhere('user_id_1', '=', $request->user()->id)->where('user_id_2', '=', $view->id)
+            ->first();
+
 
         return view ('profileUser')
-            ->with('view', $view);
+            ->with('view', $view)
+            ->with('friends', $friends);
 
     }
 

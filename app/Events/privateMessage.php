@@ -32,6 +32,8 @@ class privateMessage implements ShouldBroadcast
         $this->privateMessage = $privateMessage;
         $this->friendID = $friendID;
         $this->image = $image;
+
+
     }
 
     /**

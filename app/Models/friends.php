@@ -22,6 +22,6 @@ class friends extends Model
 
     public function user()
     {
-        return $this->belongsToMany('User');
+        return $this->belongsTo(User::class);
     }
 }
