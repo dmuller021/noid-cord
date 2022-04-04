@@ -53,7 +53,7 @@ class friendsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
