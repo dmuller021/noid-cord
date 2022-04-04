@@ -17,9 +17,11 @@
 {{--        <div class="col">test</div>--}}
 {{--        <div class="col">test</div>--}}
 {{--    </div>--}}
+
     @isset($searchedUser)
+        <div class="row">
         @foreach($searchedUser as $user)
-        <div class="profile mt-4">
+        <div class="profile col-3 mt-4">
             <div class="card mb-4 card_Class text-center">
                 <div class="lala mx-auto mb-3" style="background-image: url( {{ asset('assets/images/'.$user->image_path) }} )"></div>
                 <div class="col">{{ $user->username }}</div>
@@ -27,8 +29,8 @@
                 <a href="/user/{{ $user->username }}" class="btn btn-primary">View profile</a>
             </div>
         </div>
-    </div>
         @endforeach
+        </div>
     @endisset
 
 {{--    <div class="row">--}}

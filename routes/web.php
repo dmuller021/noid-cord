@@ -6,6 +6,7 @@ use App\Http\Controllers\friendsController;
 use App\Http\Controllers\chatController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\friendRequest;
 use App\Events\PrivateMessage;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -46,9 +47,11 @@ Route::group(['middleware' => 'auth'], function()  {
         ]
     ]);
 
-    Route::get('/friend_request', function () {
-        return view('friends.request');
-    })->name('friend_request');
+    Route::put('/accept', [friendRequest::class, 'accept'])->name('accept');
+    Route::get('/deny', [friendRequest::class, 'deny'])->name('deny');
+
+
+    Route::get('/friend_request', [friendRequest::class, 'incoming'])->name('friend_request');
 
     route::get('/search', function(){
         return view('search');

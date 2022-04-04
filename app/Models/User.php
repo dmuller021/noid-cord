@@ -58,6 +58,13 @@ class User extends Authenticatable
         return $this->hasMany(friends::class);
     }
 
+    public function friend_request()
+    {
+        return $this->hasMany(friend_request::class);
+    }
+
+
+
 //    public function messages()
 //    {
 //        return $this->hasMany(Message::class);
