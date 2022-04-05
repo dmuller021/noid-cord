@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\friends;
 use Illuminate\Support\Facades\DB;
+use App\Models\friend_request;
 
 class profileController extends Controller
 {
@@ -50,9 +51,17 @@ class profileController extends Controller
             ->first();
 
 
+        $request_exists = friend_request::select()
+            ->where('user_sent_request', '=', $request->user()->id, 'AND', 'user_received_request', '=', $view->id )
+            ->orWhere('user_sent_request', '=', $view->id, 'AND', 'user_received_request', '=', $request->user()->id )
+            ->first();
+
+//        dd($request_exists);
+
         return view ('profileUser')
             ->with('view', $view)
-            ->with('friends', $friends);
+            ->with('friends', $friends)
+            ->with('exists', $request_exists);
 
     }
 

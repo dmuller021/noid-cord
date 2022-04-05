@@ -15,7 +15,7 @@
                         {{ $user->description }}
                         <form method="POST" action="{{ route('accept') }}" value="{{ $user->id }}">
                             @csrf
-                            @method('put')
+                            @method('post')
                             <input type="hidden" name="id" value="{{ $user->id }}">
                             <button class="btn btn-success" type="submit">Accept</button>
                         </form>
@@ -23,7 +23,7 @@
 
                         <form method="GET" action="{{ route('deny') }}">
                             @csrf
-                            @method('delete')
+                            @method('get')
                             <input type="hidden" name="id" value="{{ $user->id }}">
                             <button class="btn btn-danger" type="submit">Deny</button>
                         </form>

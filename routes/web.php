@@ -47,11 +47,12 @@ Route::group(['middleware' => 'auth'], function()  {
         ]
     ]);
 
-    Route::put('/accept', [friendRequest::class, 'accept'])->name('accept');
+    Route::post('/accept', [friendRequest::class, 'accept'])->name('accept');
     Route::get('/deny', [friendRequest::class, 'deny'])->name('deny');
 
 
     Route::get('/friend_request', [friendRequest::class, 'incoming'])->name('friend_request');
+    Route::post('/request', [friendRequest::class, 'request'])->name('request');
 
     route::get('/search', function(){
         return view('search');

@@ -5,6 +5,7 @@
     {{--    <section style="background-color: #eee;">--}}
     <div class="container py-5">
 {{--    {{ dd($friends) }}--}}
+{{--        {{ dd($exists) }}--}}
         <div class="row">
             <div class="col-lg-4">
                 <div class="card mb-4">
@@ -12,10 +13,9 @@
                         <div class="lala mx-auto" style="background-image: url( {{ asset('assets/images/'.$view->image_path) }} )"></div>
                             <h5 class="my-3">{{ $view->username }}</h5>
                                 <div class="d-flex justify-content-center mb-2">
-
                                         @isset($friends->id)
                                             <p>You are friends with this person</p>
-                                            @endisset
+                                        @endisset
 
                                     @if($view->id == Auth::user()->id)
                                         <form action="/uploadimage" method="POST" enctype="multipart/form-data">
@@ -23,10 +23,17 @@
                                         <input type="file" name="image" required>
                                         <button type="submit" class="btn btn-primary">upload</button>
                                         </form>
-                                                @elseif($friends == null)
-                                                <form method="post" action="friends/friend_request">
-                                                    <button type="button" class="btn btn-outline-primary ms-1">Send friend request</button>
-                                                </form>
+
+                                    @elseif($exists != null)
+                                    <input type="submit" class="btn btn-primary" name="cancel">Cancel friend request</input>
+
+                                    @elseif(($friends == null) && ($exists == null))
+                                        <form method="POST" action="/request">
+                                        @csrf
+                                        @method('post')
+                                        <input type="hidden" name="id" value="{{ $view->id }}">
+                                        <button type="submit" class="btn btn-outline-primary ms-1">Send friend request</button>
+                                        </form>
                                     @endif
                             {{--                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>--}}
                                 </div>

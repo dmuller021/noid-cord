@@ -12,9 +12,11 @@ class friendRequest extends Controller
     public function request(Request $request){
         $request = DB::table('friend_request')
             ->insert([
-                'user_id_1' => $request->user()->id,
-                'user_id_2' => $request->input('')
+                'user_sent_request' => $request->user()->id,
+                'user_request_received' => $request->input('id')
             ]);
+
+        return view('profileMe');
     }
 
     public function incoming(Request $request) {

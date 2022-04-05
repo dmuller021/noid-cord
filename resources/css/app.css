@@ -53,3 +53,7 @@
 .card_Class{
     width: 18rem !important;
 }
+
+button {
+    background-color: #1a202c !important;
+}

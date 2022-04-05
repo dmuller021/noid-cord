@@ -10,8 +10,8 @@
         @csrf
 
 {{--                {{ dd($friends) }}--}}
-        @if($friend->user_id_1 == $id)
 
+        @if($friend->user_id_1 == $id)
 
             <div>
                 <form action="friends/{{ $friend->id }}/chat">
