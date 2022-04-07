@@ -10,17 +10,17 @@ use App\Models\friend_request;
 
 class profileController extends Controller
 {
-    //upload and hashing the image in folder and hashed filename to database
+    /* upload and hashing the image in folder and hashed filename to database */
     public function uploadImage(Request $request){
 
-        //hasshing the image
+        /* hashing the image */
         $newimage = hash_file('sha512', $request->image);
 
 
-        //moving the image to the images folder in the public/assets directory
+        /* moving the image to the images folder in the public/assets directory */
         $request->image->move(public_path('assets/images'), $newimage);
 
-        //Updating the hashed image to database
+        /* Updating the hashed image to database */
         $upload = User::where('id', $request->user()->id)
         ->update([
             'image_path'    => $newimage
@@ -29,7 +29,7 @@ class profileController extends Controller
         return redirect('myProfile');
     }
 
-    // Fetch user by username...
+    /* Fetch user by username... */
     public function view_user(Request $request){
         $view = User::where('username', $request->route('username'))
         ->first();
@@ -51,12 +51,12 @@ class profileController extends Controller
             ->first();
 
 
+        /* query check if a user already sent a friend request. */
         $request_exists = friend_request::select()
-            ->where('user_sent_request', '=', $request->user()->id, 'AND', 'user_received_request', '=', $view->id )
-            ->orWhere('user_sent_request', '=', $view->id, 'AND', 'user_received_request', '=', $request->user()->id )
+            ->where('user_sent_request', '=', $request->user()->id)->where('user_request_received', '=', $view->id )
+            ->orWhere('user_sent_request', '=', $view->id)->where('user_request_received', '=', $request->user()->id )
             ->first();
 
-//        dd($request_exists);
 
         return view ('profileUser')
             ->with('view', $view)
@@ -74,5 +74,10 @@ class profileController extends Controller
             ]);
 
         return view('friends.user');
+    }
+
+    public function cancel_request(Request $request){
+
+
     }
 }

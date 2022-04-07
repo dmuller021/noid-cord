@@ -54,6 +54,16 @@
     width: 18rem !important;
 }
 
-button {
+.btn-primary {
+    background-color: #009fff !important;
+}
+
+.btn-light {
+    border-color: #1a202c !important;
+    background-color: white !important;
+}
+
+.btn-light:hover {
     background-color: #1a202c !important;
+    color: #ffffff;
 }

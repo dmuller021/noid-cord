@@ -13,10 +13,13 @@
                         <div class="lala mx-auto" style="background-image: url( {{ asset('assets/images/'.$view->image_path) }} )"></div>
                             <h5 class="my-3">{{ $view->username }}</h5>
                                 <div class="d-flex justify-content-center mb-2">
+
+                                    {{-- If you visit a friend's profile page: --}}
                                         @isset($friends->id)
                                             <p>You are friends with this person</p>
                                         @endisset
 
+                                    {{-- When user clicks his own profile the image upload option will display under their profile --}}
                                     @if($view->id == Auth::user()->id)
                                         <form action="/uploadimage" method="POST" enctype="multipart/form-data">
                                     @csrf
@@ -24,9 +27,11 @@
                                         <button type="submit" class="btn btn-primary">upload</button>
                                         </form>
 
+                                    {{-- If the user sent a friend request to the specified profile, Cancel friend request displays --}}
                                     @elseif($exists != null)
-                                    <input type="submit" class="btn btn-primary" name="cancel">Cancel friend request</input>
+                                    <button type="submit" class="btn btn-light" name="cancel">Cancel friend request</button>
 
+                                    {{-- When the user isn't friends AND didn't send a request "Send friend request" will display --}}
                                     @elseif(($friends == null) && ($exists == null))
                                         <form method="POST" action="/request">
                                         @csrf

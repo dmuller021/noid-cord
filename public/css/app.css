@@ -1201,6 +1201,17 @@ select {
 .card_Class{
     width: 18rem !important;
 }
+.btn-primary {
+    background-color: #009fff !important;
+}
+.btn-light {
+    border-color: #1a202c !important;
+    background-color: white !important;
+}
+.btn-light:hover {
+    background-color: #1a202c !important;
+    color: #ffffff;
+}
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
