@@ -2,7 +2,7 @@
 
 
 @section('content')
-    
+
     <div>
         <header>
             @foreach($friends as $friend)
@@ -28,9 +28,16 @@
     <br>
     <form id="message_form">
        <div class="text-center">
-        <input type="text"  class="form-control" autocomplete="off" name="privateMessage" id="privateMessage" placeholder="type a message...">
-        <input type="hidden" name="image" id="image" value="{{ asset ( url( 'assets/images/'.Auth::user()->image_path) ) }}">
-        <button class="text-align" type="submit" id="message_send">Send message</button>
+           <input type="hidden" name="image" id="image" value="{{ asset ( url( 'assets/images/'.Auth::user()->image_path) ) }}">
+           <div class="row">
+               <div class="col-10">
+                    <input type="text"  class="form-control input_class" autocomplete="off" name="privateMessage" id="privateMessage" placeholder="type a message...">
+               </div>
+
+               <div class="col">
+                    <button class="btn btn-primary" type="submit" id="message_send">Send</button>
+               </div>
+           </div>
        </div>
     </form>
     </div>

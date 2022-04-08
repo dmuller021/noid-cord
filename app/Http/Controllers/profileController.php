@@ -77,7 +77,11 @@ class profileController extends Controller
     }
 
     public function cancel_request(Request $request){
+        $cancel = friends::select()
+            ->where('user_sent_request', '=', $request->user()->id)->where('user_request_received', '=')
+            ->delete();
 
+        return view('friends.friend');
 
     }
 }

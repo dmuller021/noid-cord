@@ -3,7 +3,6 @@
 
 @section('content')
 
-    {{ Auth::user()->username }}
 
     <div style="padding-left: 25%; padding-right: 25%;">
     <div>
@@ -22,8 +21,15 @@
     <form id="message_form_general">
         <div class="text-center">
         <input type="hidden" name="image" id="image" value="{{ asset ( url( 'assets/images/'.Auth::user()->image_path) )  }}">
-        <input type="text" class="form-control" autocomplete="off" name="Message" id="Message"  placeholder="type a message...">
-        <button class="text-align" type="submit" id="message_send">Send message</button>
+        <div class="row">
+            <div class="col-10">
+        <input type="text" class="form-control input_class" autocomplete="off" name="Message" id="Message"  placeholder="type a message...">
+            </div>
+
+            <div class="col">
+        <button class="btn btn-primary" type="submit" id="message_send">Send</button>
+            </div>
+        </div>
         </div>
     </form>
     </div>

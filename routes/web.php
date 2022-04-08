@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth'], function()  {
 
     Route::get('/friend_request', [friendRequest::class, 'incoming'])->name('friend_request');
     Route::post('/request', [friendRequest::class, 'request'])->name('request');
+    Route::post('/cancel', [profileController::class, 'cancel_request'])->name('cancel');
 
     route::get('/search', function(){
         return view('search');
